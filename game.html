@@ -12,17 +12,27 @@
     <h1>🎵 Blind Test Musique</h1>
     <p>Écoute l’extrait et devine le titre</p>
 
-    <!-- Audio caché -->
+    <!-- Bouton obligatoire pour autoriser le son -->
+    <button id="startBtn" class="btn">▶️ Démarrer le blind test</button>
+
+    <!-- Audio invisible -->
     <audio id="audio"></audio>
 
     <input
       type="text"
       id="answer"
       placeholder="Ta réponse ici..."
+      disabled
       style="margin-top:20px; padding:10px; width:100%; border-radius:10px;"
     />
 
-    <button class="btn" style="margin-top:15px" onclick="checkAnswer()">
+    <button
+      class="btn"
+      style="margin-top:15px"
+      onclick="checkAnswer()"
+      disabled
+      id="validateBtn"
+    >
       Valider
     </button>
 
