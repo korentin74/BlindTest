@@ -1,7 +1,6 @@
 const audio = document.getElementById("audio");
-const startBtn = document.getElementById("startBtn");
-const answerInput = document.getElementById("answer");
-const validateBtn = document.getElementById("validateBtn");
+const progress = document.querySelector(".progress");
+const indicator = document.querySelector(".play-indicator");
 const result = document.getElementById("result");
 
 const DUREE_EXTRAIT = 6;
@@ -11,42 +10,42 @@ const musique = {
   answer: "joe le taxi"
 };
 
-// verrouillage total
+// Sécurité
 audio.controls = false;
 audio.preload = "auto";
-audio.disableRemotePlayback = true;
 
-// sécurité anti-manipulation
-audio.addEventListener("play", () => {
-  audio.currentTime = 0;
-});
-audio.addEventListener("seeking", () => {
-  audio.currentTime = 0;
-});
-
-startBtn.addEventListener("click", () => {
-  startBtn.disabled = true;
-  answerInput.disabled = false;
-  validateBtn.disabled = false;
-
+function startMusic() {
   audio.src = musique.src;
   audio.currentTime = 0;
   audio.play();
 
-  // arrêt forcé après X secondes
+  indicator.classList.add("active");
+
+  const startTime = Date.now();
+
+  const interval = setInterval(() => {
+    const elapsed = (Date.now() - startTime) / 1000;
+    const percent = Math.min((elapsed / DUREE_EXTRAIT) * 100, 100);
+    progress.style.width = percent + "%";
+  }, 50);
+
   setTimeout(() => {
     audio.pause();
+    indicator.classList.remove("active");
+    clearInterval(interval);
   }, DUREE_EXTRAIT * 1000);
+}
+
+// Anti-triche TOTAL
+audio.addEventListener("pause", () => {
+  if (audio.currentTime < DUREE_EXTRAIT) {
+    audio.play();
+  }
 });
 
-function checkAnswer() {
-  const input = answerInput.value.toLowerCase();
+audio.addEventListener("seeking", () => {
+  audio.currentTime = 0;
+});
 
-  if (input.includes(musique.answer)) {
-    result.textContent = "✅ Bonne réponse !";
-    result.style.color = "#00ffcc";
-  } else {
-    result.textContent = "❌ Mauvaise réponse";
-    result.style.color = "red";
-  }
-}
+// Lancer au clic utilisateur
+document.getElementById("startBtn").addEventListener("click", startMusic);
