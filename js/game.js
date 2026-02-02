@@ -1,10 +1,9 @@
 const audio = document.getElementById("audio");
 const result = document.getElementById("result");
+const startBtn = document.getElementById("startBtn");
+const answerInput = document.getElementById("answer");
+const validateBtn = document.getElementById("validateBtn");
 
-let score = 0;
-let current = 0;
-
-// durée d'écoute (en secondes)
 const DUREE_EXTRAIT = 6;
 
 const musiques = [
@@ -14,32 +13,34 @@ const musiques = [
   }
 ];
 
-// empêcher toute interaction
-audio.controls = false;
-audio.preload = "auto";
+let current = 0;
+let score = 0;
 
-// charger et jouer la musique
-function loadMusic() {
+// aucune interaction possible
+audio.controls = false;
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  answerInput.disabled = false;
+  validateBtn.disabled = false;
+
+  playMusic();
+});
+
+function playMusic() {
   audio.src = musiques[current].src;
   audio.currentTime = 0;
   audio.load();
 
-  // lecture forcée
-  audio.play().catch(() => {});
+  audio.play();
 
-  // arrêt automatique après X secondes
   setTimeout(() => {
     audio.pause();
   }, DUREE_EXTRAIT * 1000);
-
-  result.textContent = "";
-  document.getElementById("answer").value = "";
 }
 
-loadMusic();
-
 function checkAnswer() {
-  const input = document.getElementById("answer").value.toLowerCase();
+  const input = answerInput.value.toLowerCase();
 
   if (input.includes(musiques[current].answer)) {
     result.textContent = "✅ Bonne réponse !";
