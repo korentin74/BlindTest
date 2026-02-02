@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Blind Test – Musique</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎵 Blind Test Musique</h1>
+    <p>Écoute l’extrait et devine le titre</p>
+
+    <audio id="audio" controls></audio>
+
+    <input
+      type="text"
+      id="answer"
+      placeholder="Ta réponse ici..."
+      style="margin-top:15px; padding:10px; width:100%; border-radius:10px;"
+    />
+
+    <button class="btn" style="margin-top:15px" onclick="checkAnswer()">
+      Valider
+    </button>
+
+    <p id="result" style="margin-top:15px"></p>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>
