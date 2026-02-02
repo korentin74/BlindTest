@@ -2,20 +2,40 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Test Audio</title>
+  <title>Blind Test</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<button onclick="play()">▶️ TEST SON</button>
+<div class="container">
+  <h1>🎵 Blind Test</h1>
+  <p>Écoute l’extrait et devine le titre</p>
 
-<audio id="audio" src="assets/audio/joe_le_taxi.mp3"></audio>
+  <!-- 1 seule interaction autorisée -->
+  <button id="startBtn" class="btn">▶️ Lancer l’extrait</button>
 
-<script>
-function play() {
-  const audio = document.getElementById("audio");
-  audio.play();
-}
-</script>
+  <!-- Audio totalement caché -->
+  <audio id="audio"></audio>
 
+  <input
+    id="answer"
+    placeholder="Ta réponse..."
+    disabled
+    style="margin-top:15px"
+  >
+
+  <button
+    class="btn"
+    id="validateBtn"
+    onclick="checkAnswer()"
+    disabled
+  >
+    Valider
+  </button>
+
+  <p id="result"></p>
+</div>
+
+<script src="js/game.js"></script>
 </body>
 </html>
