@@ -4,7 +4,7 @@ const result = document.getElementById("result");
 const goodAnswer = "despacito";
 
 // extrait test (à remplacer plus tard)
-audio.src = "assets/audio/test.mp3";
+audio.src = "assets/audio/Vanessa Paradis  - Joe le taxi.mp3";
 
 function checkAnswer() {
   const userAnswer = document.getElementById("answer").value.toLowerCase();
