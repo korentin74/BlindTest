@@ -11,9 +11,18 @@ const musique = {
   answer: "joe le taxi"
 };
 
-// sécurité
+// verrouillage total
 audio.controls = false;
 audio.preload = "auto";
+audio.disableRemotePlayback = true;
+
+// sécurité anti-manipulation
+audio.addEventListener("play", () => {
+  audio.currentTime = 0;
+});
+audio.addEventListener("seeking", () => {
+  audio.currentTime = 0;
+});
 
 startBtn.addEventListener("click", () => {
   startBtn.disabled = true;
@@ -24,7 +33,7 @@ startBtn.addEventListener("click", () => {
   audio.currentTime = 0;
   audio.play();
 
-  // arrêt forcé
+  // arrêt forcé après X secondes
   setTimeout(() => {
     audio.pause();
   }, DUREE_EXTRAIT * 1000);
