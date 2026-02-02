@@ -1,9 +1,9 @@
 const audio = document.getElementById("audio");
 const result = document.getElementById("result");
 
-const goodAnswer = "despacito";
+const goodAnswer = "joe le taxi";
 
-// extrait test (à remplacer plus tard)
+// extrait test
 audio.src = "assets/audio/joe_le_taxi.mp3";
 audio.load();
 
