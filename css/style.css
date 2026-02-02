@@ -115,3 +115,7 @@ p {
   background: linear-gradient(90deg, #00ffff, #0066ff);
   transition: width 0.1s linear;
 }
+
+audio {
+  pointer-events: none; /* BLOQUE TOUTES les interactions */
+}
